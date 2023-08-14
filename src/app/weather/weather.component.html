@@ -1,0 +1,11 @@
+<h2>Current Weather</h2>
+<div *ngIf="currentWeather">
+  Location: {{ currentWeather.name }}, {{ currentWeather.sys.country }}
+  Temperature: {{ currentWeather.main.temp }}°C
+  Weather: {{ currentWeather.weather[0].description }}
+</div>
+
+<h2>Forecast</h2>
+<div *ngIf="forecast">
+  <!-- Display forecast data here -->
+</div>
