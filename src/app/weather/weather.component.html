@@ -1,11 +1,39 @@
-<h2>Current Weather</h2>
-<div *ngIf="currentWeather">
-  Location: {{ currentWeather.name }}, {{ currentWeather.sys.country }}
-  Temperature: {{ currentWeather.main.temp }}°C
-  Weather: {{ currentWeather.weather[0].description }}
-</div>
+<!-- src/app/weather/weather.component.html -->
+<div class="  bg-gray-100 min-h-screen">
+  <div class="max-w-md w-full bg-white mx-auto mb-8 p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-semibold mb-4">Weather Information</h1>
 
-<h2>Forecast</h2>
-<div *ngIf="forecast">
-  <!-- Display forecast data here -->
+    <!-- Current Weather Section -->
+    <div class="mb-8">
+      <h2 class="text-xl font-semibold mb-2">Current Weather</h2>
+      <div class="border rounded-lg p-4">
+        <div>
+          <h3 class="text-lg font-semibold">{{ currentWeather.name }} {{ currentWeather.sys.country }}</h3>
+          <p class="text-gray-600">{{ formatDate(currentWeather.dt) }}</p>
+          <p class="text-3xl font-semibold">{{ (currentWeather.main.temp-273.16).toFixed(2) }}°C</p>
+          <p> Feels Like: {{(currentWeather.main.feels_like-273.16).toFixed(2)}}°C</p>
+          <p>Pressure: {{currentWeather.main.pressure}}</p>
+          <p>Max: {{(currentWeather.main.temp_max-273.16).toFixed(2)}}°C</p>
+          <p>Min: {{(currentWeather.main.temp_min-273.16).toFixed(2)}}°C</p>
+          <p>Humidity: {{currentWeather.main.humidity}}%</p>
+          <p class="text-gray-600">{{ currentWeather.weather[0].description }}</p>
+        </div>
+      </div>
+    </div> 
+  </div>
+
+  <!-- Forecast Section -->
+  <div class=" w-full bg-white mx-auto p-6 rounded-lg shadow-md" >
+    <h2 class="text-xl font-semibold mb-2">Weather Forecast</h2>
+    <div class="grid grid-cols-4 gap-4">
+      <div *ngFor="let day of forecastData" class="border rounded-lg p-4 bg-blue-100 hover:bg-blue-200 transition-colors duration-300">
+        <h3 class="text-lg font-semibold w-fit mx-auto">{{  formatDate(day.dt) }}</h3>
+        <div class="flex justify-between">
+          <p class="text-lg font-semibold">Max: {{ (day.main.temp_max - 273.16).toFixed(2) }}°C</p>
+          <p class="text-lg font-semibold">Min: {{ (day.main.temp_min-273.16).toFixed(2) }}°C</p>
+        </div>
+        <p class="text-gray-600">{{ day.weather[0].description }}</p>
+      </div>
+    </div>
+  </div>
 </div>
